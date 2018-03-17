@@ -97,12 +97,14 @@ while (flag):
 
     resp = numpy.random.choice(response,p=[0.9,0.04,0.02,0.04])
     byt = int(random.gauss(5000,50))
+    x= float(random.uniform(0, 1))
+    restime= ("%.3f" % x)
     referer = faker.uri()
     useragent = numpy.random.choice(ualist,p=[0.5,0.3,0.1,0.05,0.05] )()
     if log_format == "CLF":
-        f.write('%s - - [%s %s] "%s %s HTTP/1.0" %s %s\n' % (ip,dt,tz,vrb,uri,resp,byt))
+        f.write('%s - - [%s %s] "%s %s HTTP/1.1" %s %s\n' % (ip,dt,tz,vrb,uri,resp,byt))
     elif log_format == "ELF": 
-        f.write('%s - - [%s %s] "%s %s HTTP/1.0" %s %s "%s" "%s"\n' % (ip,dt,tz,vrb,uri,resp,byt,referer,useragent))
+        f.write('%s - - [%s %s] "%s %s HTTP/1.1" %s %s %s %s ."-" "%s"\n' % (ip,dt,tz,vrb,uri,resp,byt,restime,restime,useragent))
     f.flush()
 
     log_lines = log_lines - 1
